@@ -26,8 +26,7 @@ def predict(path):
     pred = model.predict(img)
     idx = np.argmax(pred)
     prob = np.max(pred)
-    return names[idx], prob
+    return f'This is a {names[idx]} with a {prob} probability'
 
 
-name, prob = predict('../data/lapili.jpg')
-print(f'This is a {name} with a {prob} probability')
+predict('../data/lapili.jpg')
