@@ -3,6 +3,8 @@
 import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
+from PIL import Image
+import matplotlib.pyplot as plt
 
 model = load_model('../models/model.h5')
 
@@ -23,10 +25,20 @@ def predict(path):
     names = ['Cat', 'Dog'] #the model cat == 0 and dog == 1
     
     img = load_image(path)
-    pred = model.predict(img)
+    pred = model.predict(img) #please mr ia if you could
     idx = np.argmax(pred)
     prob = np.max(pred)
     return print(f'This is a {names[idx]} with a {prob} probability')
 
+def shows_pred(path):
+    #shows the image and its prediction
+    
+    img = Image.open(path)
+    pred = predict(path)
 
-predict('../data/lapili.jpg')
+    plt.figure(figsize=(10, 8))
+    plt.imshow(img)
+    plt.title(pred)
+    plt.axis('off')
+    plt.show()
+
